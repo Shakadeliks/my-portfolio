@@ -1,16 +1,26 @@
-import { useTheme } from "../../context/theme/ThemeProvider"
+'use client'
 
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 export function ThemeToggle() {
+    const [mounted, setMounted] = useState(false)
+    const { theme, setTheme } = useTheme()
 
-    const { theme, toggleTheme } = useTheme()
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return null
+    }
 
     return (
         <button
-            onClick={toggleTheme}
-            className=""
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        className="p-2"
         >
-            {theme === 'light' ? '☀️' : '🌙'}
+        {theme === 'light' ? '🌙' : '☀️'}
         </button>
     )
 }
