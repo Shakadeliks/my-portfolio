@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
 import { Fredoka, Sigmar, Darumadrop_One, Grechen_Fuemen, Playfair_Display, Heebo, Jacquard_12_Charted, Delicious_Handrawn, Lilita_One, Pacifico} from "next/font/google";
 import "./globals.css";
-import { NavBar } from "./components/organisms/NavBar";
-import { ThemeProvider } from "./context/theme/ThemeProvider";
+import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/Footer";
+import { ThemeProvider } from "next-themes";
 
 const fredoka = Fredoka({ variable: "--font-fredoka", subsets: ["latin"], });
 const sigmar = Sigmar({ variable: "--font-sigmar", subsets: ["latin"], weight: "400", });
@@ -35,9 +35,11 @@ export default function RootLayout({
       <body
         className={ `antialiased bg-white dark:bg-black text-black dark:text-white` }
         style={{ fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif' }}
-      > 
+      >
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+        <Navigation />
         {children}
+        <Footer />
       </ThemeProvider>
       </body>
     </html>
