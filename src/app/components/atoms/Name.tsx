@@ -30,6 +30,6 @@ export function Name() {
 
 
     return (
-        <h1 className={`${fonts[currentFontIdx]}`}>Olwethu "Shak" Matiwana</h1>
+        <h1 className={`${fonts[currentFontIdx]}`}>Olwethu &quot;Shak&quot; Matiwana</h1>
     )
 }
