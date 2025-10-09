@@ -7,19 +7,24 @@ import { ProjectMetrics } from './ProjectMetrics';
 import { ProjectInsights } from './ProjectInsights';
 import { ProjectTechStack } from './ProjectTechStack';
 import { cn } from '@/lib/utils';
+import { useDarkMode } from '@/contexts/DarkModeContext';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { darkMode } = useDarkMode();
+
   return (
     <div
       className={cn(
         "border-4 border-black shadow-[16px_16px_0px_0px_rgba(0,0,0,1)]",
         project.featured
           ? "bg-orange-600 text-white"
-          : "bg-white text-black dark:bg-black dark:text-white"
+          : darkMode
+            ? "bg-white text-black"
+            : "bg-black text-white"
       )}
     >
       <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -99,7 +104,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 "flex items-center justify-center space-x-3 px-6 py-3 border-4 border-black font-black hover:scale-105 transition-transform shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
                 project.featured
                   ? "bg-black text-white hover:bg-white hover:text-black"
-                  : "bg-white text-black hover:bg-orange-600 hover:text-white dark:bg-black dark:text-white dark:hover:bg-orange-600"
+                  : darkMode
+                    ? "bg-black text-white hover:bg-orange-600"
+                    : "bg-white text-black hover:bg-orange-600 hover:text-white"
               )}
             >
               <Github size={20} />
