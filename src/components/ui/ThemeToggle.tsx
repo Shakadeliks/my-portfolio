@@ -1,33 +1,22 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Sun, Moon } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { useDarkMode } from '@/contexts/DarkModeContext';
 
 export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  const isDark = theme === 'dark';
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={toggleDarkMode}
       className={`p-3 border-4 border-black font-bold transition-colors ${
-        isDark
+        darkMode
           ? 'bg-white text-black hover:bg-orange-600 hover:text-white'
           : 'bg-black text-white hover:bg-orange-600'
       }`}
     >
-      {isDark ? <Sun size={24} /> : <Moon size={24} />}
+      {darkMode ? <Sun size={24} /> : <Moon size={24} />}
     </button>
   );
 }

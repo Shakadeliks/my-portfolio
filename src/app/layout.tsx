@@ -2,7 +2,7 @@ import { Fredoka, Sigmar, Darumadrop_One, Grechen_Fuemen, Playfair_Display, Heeb
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
-import { ThemeProvider } from "next-themes";
+import { DarkModeProvider } from "@/contexts/DarkModeContext";
 
 const fredoka = Fredoka({ variable: "--font-fredoka", subsets: ["latin"], });
 const sigmar = Sigmar({ variable: "--font-sigmar", subsets: ["latin"], weight: "400", });
@@ -33,14 +33,14 @@ export default function RootLayout({
       ${lilita.variable}
       ${pacifico.variable}`}>
       <body
-        className={ `antialiased bg-white dark:bg-black text-black dark:text-white` }
+        className="antialiased"
         style={{ fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif' }}
       >
-      <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+      <DarkModeProvider>
         <Navigation />
         {children}
         <Footer />
-      </ThemeProvider>
+      </DarkModeProvider>
       </body>
     </html>
   );

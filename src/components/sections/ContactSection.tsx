@@ -1,13 +1,17 @@
+'use client';
+
 import React from 'react';
 import { Mail, Linkedin } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { personalInfo } from '@/data/personal';
+import { useDarkMode } from '@/contexts/DarkModeContext';
 
 export function ContactSection() {
+  const { darkMode } = useDarkMode();
   const linkedinLink = personalInfo.socialLinks.find(link => link.platform === 'linkedin');
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 border-t-4 border-black bg-black text-white dark:bg-white dark:text-black">
+    <section id="contact" className={`py-20 px-4 sm:px-6 lg:px-8 border-t-4 border-black ${darkMode ? 'bg-white text-black' : 'bg-black text-white'}`}>
       <div className="max-w-4xl mx-auto text-center">
         <SectionHeading highlight="AMAZING">
           LET&apos;S BUILD SOMETHING AMAZING
@@ -25,7 +29,11 @@ export function ContactSection() {
           </a>
           <a
             href={linkedinLink?.url}
-            className="flex items-center justify-center space-x-3 border-4 border-black px-8 py-4 font-black text-lg transition-colors shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:scale-105 transform bg-white text-black hover:bg-orange-600 hover:text-white dark:bg-black dark:text-white dark:hover:bg-orange-600"
+            className={`flex items-center justify-center space-x-3 border-4 border-black px-8 py-4 font-black text-lg transition-colors shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:scale-105 transform ${
+              darkMode
+                ? 'bg-black text-white hover:bg-orange-600'
+                : 'bg-white text-black hover:bg-orange-600 hover:text-white'
+            }`}
           >
             <Linkedin size={24} />
             <span>CONNECT ON LINKEDIN</span>
